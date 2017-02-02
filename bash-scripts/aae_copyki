@@ -1,0 +1,3 @@
+#!/bin/bash
+
+aae_getki $1 2>/dev/null | sed "/KI/s|ID=\"\(.\+\)\"|ID=\"$(uuidgen)\"|g" | sed '/Title/s|<Title>\(.\+\)</Title>|<Title>Copy of \1</Title>|g' | aae_putki /dev/stdin 2>&1 | sed 's|store /dev/stdin(ID: \(.\+\)) successful\.|ID: \1|g'
